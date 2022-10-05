@@ -19,22 +19,4 @@ export default class BaseView extends HTMLElement {
     return '';
   }
 
-  /**
-   *
-   * @param {string} selector
-   * @param {string | Object} properties
-   */
-  set(selector, properties) {
-    const view = this.querySelector(selector);
-
-    if (typeof properties === 'string') {
-      properties = {textContent:properties};
-
-    }
-    Object.assign(view,properties);
-
-    return this;
-  }
-
-
 }

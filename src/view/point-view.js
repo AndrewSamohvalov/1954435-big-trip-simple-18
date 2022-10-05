@@ -14,7 +14,12 @@ export default class PointView extends BaseView {
    */
 
   setTitle(title){
-    return this.set('.event__title', title);
+
+    const titlePoint = this.querySelector('.event__title');
+
+    Object.assign(titlePoint, {textContent: title});
+
+    return this;
 
   }
 
