@@ -4,10 +4,6 @@ import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view';
 import RouteModel from '../model/route-model.js';
 
-import dayjs from 'dayjs';
-import duration from 'dayjs/plugin/duration';
-dayjs.extend(duration);
-
 
 export default class RoutePresenter {
   view = new RouteView();
@@ -28,17 +24,25 @@ export default class RoutePresenter {
    * @param {AggregatedPoint} point
    */
   createPointView(point) {
-    console.log(point);
+    const {
+      type,
+      destination,
+      date_from,
+      date_to,
+      base_price
+    } = point;
 
-    //const startDate = dayjs(point['date_from']).format('HH:mm');
+    const title = `${type} ${destination.name}`;
+
 
     return new PointView()
 
-      .setTitle(point.destination.name)
-      //.setStartTime(point.date_from)
-      //.setStartTime(startDate);
-      .setStartTime(formatTime(point.date_from),point.date_from);
-
+      .setDate(formatDate(date_from), date_from)
+      .setIcon(type)
+      .setTitle(title)
+      .setStartTime(formatTime(date_from),date_from)
+      .setEndTime(formatTime(date_to), date_to)
+      .setPrice(base_price);
 
   }
 }

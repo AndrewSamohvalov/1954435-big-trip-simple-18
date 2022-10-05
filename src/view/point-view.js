@@ -9,6 +9,39 @@ export default class PointView extends BaseView {
   createAdjacentHtml() {
     return createPointTemplate(...arguments);
   }
+
+  /**
+   * Устанавливает дату
+   * @param {string} date
+   * @param {string} isoDate
+   */
+
+  setDate(date, isoDate) {
+
+    const datePoint = this.querySelector('.event__date');
+
+    Object.assign(datePoint, {
+      dateTime: isoDate,
+      textContent: date
+    });
+
+    return this;
+  }
+
+  /**
+   * Устанавливает иконку
+   * @param {string} type
+   */
+
+  setIcon(type) {
+
+    const iconPoint = this.querySelector('.event__type-icon');
+
+    Object.assign(iconPoint, {src: `img/icons/${type}.png`});
+
+    return this;
+  }
+
   /**
    * @param {string} title
    */
@@ -28,12 +61,14 @@ export default class PointView extends BaseView {
    * @param {string} isoDate
    */
   setStartTime(time,isoDate) {
-    return this.set('.event__start-time',
-      {
-        textContent:time,
-        dateTime:isoDate
+    const startTimePoint = this.querySelector('.event__start-time');
 
-      });
+    Object.assign(startTimePoint, {
+      textContent: time,
+      dateTime: isoDate
+    });
+
+    return this;
 
   }
 
@@ -42,14 +77,31 @@ export default class PointView extends BaseView {
    * @param {string} isoDate
    */
   setEndTime(time,isoDate) {
-    return this.set('.event__start-time',
-      {
-        textContent:time,
-        dateTime:isoDate
+    const endTimePoint = this.querySelector('.event__end-time');
 
-      });
+    Object.assign(endTimePoint, {
+      textContent: time,
+      dateTime: isoDate
+    });
+
+    return this;
+
   }
 
+  /**
+   * Устанавливает цену
+   * @param {number} price
+   */
+
+  setPrice(price) {
+
+    const pricePoint = this.querySelector('.event__price-value');
+
+    Object.assign(pricePoint, {textContent: price});
+
+    return this;
+  }
 }
+
 
 customElements.define('trip-point', PointView);
