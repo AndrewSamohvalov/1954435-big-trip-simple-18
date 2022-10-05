@@ -1,48 +1,45 @@
-import TripRouteView from '../view/trip-route-view.js';
-import TripSortView from '../view/trip-sort-view.js';
-import TripPointView from '../view/trip-route-view';
-import TripNewPointView from '../view/trip-new-point-view';
-import TripPointEditorView from '../view/trip-point-editor-view';
+import {formatDate,formatTime} from '../utils.js';
+import RouteView from '../view/route-veiw.js';
+import PointView from '../view/point-view.js';
+import PointEditorView from '../view/point-editor-view';
+import RouteModel from '../model/route-model.js';
+
+import dayjs from 'dayjs';
+import duration from 'dayjs/plugin/duration';
+dayjs.extend(duration);
+
 
 export default class RoutePresenter {
-  routeElement = new TripRouteView();
+  view = new RouteView();
+  model = new RouteModel();
 
   init(containerElement) {
-    this.containerElement = containerElement;
 
-    this.routeElement.append(new TripSortView());
-    this.routeElement.append(new TripNewPointView());
-    this.routeElement.append(new TripPointEditorView());
+    const points = this.model.get();
 
-    for (let i = 0; i < 3; i++) {
-      this.routeElement.append(new TripPointView());
-    }
+    this.view.append(new PointEditorView());
+    this.view.append(...points.map(this.createPointView,this));
 
-    containerElement.append(this.routeElement);
+    containerElement.append(this.view);
+  }
+
+  /**
+   *
+   * @param {AggregatedPoint} point
+   */
+  createPointView(point) {
+    console.log(point);
+
+    //const startDate = dayjs(point['date_from']).format('HH:mm');
+
+    return new PointView()
+
+      .setTitle(point.destination.name)
+      //.setStartTime(point.date_from)
+      //.setStartTime(startDate);
+      .setStartTime(formatTime(point.date_from),point.date_from);
+
+
   }
 }
 
-/*
-import BaseView from '../view/base-view.js';
-import SortView from '../view/sort-view.js';
-import WayPointListView from '../view/way-point-list-view.js';
-import WayPointView from '../view/way-point-view.js';
-import CreationFormView from '../view/creation-form-view.js';
-import EditFormView from '../view/edit-form-view.js';
-import { render } from '../render.js';
-
-export default class RoutePresenter {
-  wayPointListComponent = new WayPointListView();
-
-  init = (eventsContainer) => {
-    this.eventsContainer = eventsContainer;
-    render(new SortView(), this.eventsContainer);
-    render(this.wayPointListComponent, this.eventsContainer);
-    render(new EditFormView(), this.wayPointListComponent.getElement());
-    render(new CreationFormView(), this.wayPointListComponent.getElement());
-    for (let i = 0; i < 3; i++) {
-      render(new WayPointView(), this.wayPointListComponent.getElement());
-    }
-  };
-}
-*/

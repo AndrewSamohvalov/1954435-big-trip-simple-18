@@ -1,4 +1,4 @@
-const createAdjacentHtmlPoint = () => /*html*/ `
+export const createPointTemplate = () => /*html*/ `
   <div class="event">
     <time class="event__date" datetime="2019-03-18">MAR 18</time>
     <div class="event__type">
@@ -29,4 +29,4 @@ const createAdjacentHtmlPoint = () => /*html*/ `
   </div>
 `;
 
-export { createAdjacentHtmlPoint };
+
