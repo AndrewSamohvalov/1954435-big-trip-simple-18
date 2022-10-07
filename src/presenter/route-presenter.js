@@ -43,7 +43,6 @@ export default class RoutePresenter {
       .setStartTime(formatTime(date_from),date_from)
       .setEndTime(formatTime(date_to), date_to)
       .setPrice(base_price);
-
   }
 }
 

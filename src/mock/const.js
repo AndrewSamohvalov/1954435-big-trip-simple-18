@@ -1,3 +1,23 @@
+import { getRandomElement } from '../utils.js';
+
+/** Генерирует случайный тип точки */
+const generatePointType = () => {
+  const pointTypes = [
+    'taxi',
+    'bus',
+    'train',
+    'ship',
+    'drive',
+    'flight',
+    'check-in',
+    'sightseeing',
+    'restaurant'
+  ];
+
+  return getRandomElement(pointTypes);
+};
+
+/*
 const POINT_TYPES = [
   'taxi',
   'bus',
@@ -10,7 +30,7 @@ const POINT_TYPES = [
   'restaurant',
 ];
 
-export { POINT_TYPES };
+export { POINT_TYPES };*/
 
 
 /*
