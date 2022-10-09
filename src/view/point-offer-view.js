@@ -1,5 +1,5 @@
 import BaseView from './base-view.js';
-import createOfferTemplate from './offer-template.js';
+import {createPointOfferTemplate} from './point-offer-template.js';
 
 /** Дополнительная опция */
 export default class PointOfferView extends BaseView {
@@ -10,7 +10,7 @@ export default class PointOfferView extends BaseView {
 
   /** @override */
   createAdjacentHtml() {
-    return createOfferTemplate();
+    return createPointOfferTemplate();
   }
 
   /**

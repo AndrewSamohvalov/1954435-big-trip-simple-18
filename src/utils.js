@@ -20,6 +20,27 @@ const getRandomElement = (elements) => {
   return elements[randomIndex];
 };
 
+/**
+ * Возвращает уникальное случайное число
+ * @param {number} min
+ * @param {number} max
+ */
+const getRandomUniqueInteger = (min, max) => {
+  const previousValues = [];
+
+  return () => {
+    let currentValue = getRandomInteger(min, max);
+
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+};
+
+
 /* Возврашает дату в формате 'MMM YY'
 * @param {string} isoDate
 * @return {string}
@@ -33,6 +54,6 @@ const formatDate = (isoDate) => dayjs(isoDate).format('MMM YY');
 const formatTime = (isoDate) => dayjs(isoDate).format('HH:mm');
 
 
-export {getRandomInteger,getRandomElement,formatDate,formatTime};
+export {getRandomInteger,getRandomElement,getRandomUniqueInteger,formatDate,formatTime};
 
 

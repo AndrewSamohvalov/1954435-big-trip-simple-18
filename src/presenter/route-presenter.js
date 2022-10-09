@@ -3,6 +3,7 @@ import RouteView from '../view/route-veiw.js';
 import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view';
 import RouteModel from '../model/route-model.js';
+import PointOfferView from '../view/point-offer-view.js';
 
 
 export default class RoutePresenter {
@@ -17,6 +18,7 @@ export default class RoutePresenter {
     this.view.append(...points.map(this.createPointView,this));
 
     containerElement.append(this.view);
+
   }
 
   /**
@@ -29,7 +31,8 @@ export default class RoutePresenter {
       destination,
       date_from,
       date_to,
-      base_price
+      base_price,
+      offers
     } = point;
 
     const title = `${type} ${destination.name}`;
@@ -42,7 +45,19 @@ export default class RoutePresenter {
       .setTitle(title)
       .setStartTime(formatTime(date_from),date_from)
       .setEndTime(formatTime(date_to), date_to)
-      .setPrice(base_price);
+      .setPrice(base_price)
+      .appendOffer(...offers.map(this.createOfferView, this));
   }
+
+  /**
+   * Создает дополнительную опцию
+   * @param {Offer} offer
+   */
+  createOfferView(offer) {
+    return new PointOfferView()
+      .setTitle(offer.title)
+      .setPrice(offer.price);
+  }
+
 }
 
