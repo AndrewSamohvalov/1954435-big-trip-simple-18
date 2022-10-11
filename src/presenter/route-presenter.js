@@ -29,9 +29,9 @@ export default class RoutePresenter {
     const {
       type,
       destination,
-      date_from,
-      date_to,
-      base_price,
+      dateFrom,
+      dateTo,
+      basePrice,
       offers
     } = point;
 
@@ -40,12 +40,12 @@ export default class RoutePresenter {
 
     return new PointView()
 
-      .setDate(formatDate(date_from), date_from)
+      .setDate(formatDate(dateFrom), dateFrom)
       .setIcon(type)
       .setTitle(title)
-      .setStartTime(formatTime(date_from),date_from)
-      .setEndTime(formatTime(date_to), date_to)
-      .setPrice(base_price)
+      .setStartTime(formatTime(dateFrom),dateFrom)
+      .setEndTime(formatTime(dateTo), dateTo)
+      .setPrice(basePrice)
       .appendOffer(...offers.map(this.createOfferView, this));
   }
 

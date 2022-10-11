@@ -61,9 +61,9 @@ export const generatePoint = (id) => ({
   'id':String(id),
   'type': 'taxi',
   'destination': id,
-  'date_from': '2019-07-10T22:55:56.845Z',
-  'date_to': '2019-07-11T11:22:13.375Z',
-  'base_price': 222,
+  'dateFrom': '2019-07-10T22:55:56.845Z',
+  'dateTo': '2019-07-11T11:22:13.375Z',
+  'basePrice': 222,
   'offers': [id],
 });
 
