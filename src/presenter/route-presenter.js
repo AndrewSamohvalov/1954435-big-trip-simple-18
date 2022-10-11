@@ -26,14 +26,7 @@ export default class RoutePresenter {
    * @param {AggregatedPoint} point
    */
   createPointView(point) {
-    const {
-      type,
-      destination,
-      dateFrom,
-      dateTo,
-      basePrice,
-      offers
-    } = point;
+    const { type, destination,dateFrom, dateTo, basePrice, offers } = point;
 
     const title = `${type} ${destination.name}`;
 

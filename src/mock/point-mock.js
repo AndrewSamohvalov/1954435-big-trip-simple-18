@@ -1,70 +1,54 @@
-import { getRandomInteger } from '../utils.js';
+import {getRandomInteger, getRandomElement} from '../utils.js';
+import {POINT_TYPES} from './const.js';
+import dayjs from 'dayjs';
 
-
-/** Создает случайный тип события на маршруте */
-const generatePointType = () => {
-  const pointType = [
-    'taxi',
-    'bus',
-    'train',
-    'ship',
-    'drive',
-    'flight',
-    'check-in',
-    'sightseeing',
-    'restaurant'
-  ];
-
-  const randomIndex = getRandomInteger(0, pointType.length - 1);
-
-  return pointType[randomIndex];
+const PointPrise = {
+  MIN: 10,
+  MAX: 50,
+  MULTIPLIER: 10
 };
 
-/** Генерирует данные пункта назначения
- * @param {number} id
- * @return {destination}
-*/
-export const generateDestination = (id) => ({
-  id,
-  name: 'Chamonix',
-  description: 'Chamonix, is a beautiful city, a true asian pearl, with crowded streets.',
-  pictures: [
-    {
-      src: 'http://picsum.photos/300/200?r=0.0762563005163317',
-      description: 'Chamonix parliament building'
-    }
-  ]
-});
+const PointDate = {
+  MIN_HOUR: 1,
+  MAX_HOUR: 7,
+  MIN_DAY: 1,
+  MAX_DAY: 7
+};
 
-const generateOffer = (id)=>({
-  id,
-  title: 'Upgrade to a business class',
-  price: 120
+const createDate = () => {
+  // const hoursGap = getRandomInteger(PointDate.MIN_HOUR, PointDate.MAX_HOUR);
 
-});
+  const daysGap = getRandomInteger(PointDate.MIN_DAY, PointDate.MAX_DAY);
 
-/**Генерирует данные дополнительных опций
- * @return {OfferGroup}
- */
-export const generateOfferGroup = () => ({
-  type: 'taxi',
-  offers:[
-    generateOffer(0)
-  ]
-});
+  const getDate = dayjs().add(daysGap, 'day').toDate();
 
-/** Создает данные для события на маршруте путешествия
+  return ({
+    from: getDate,
+    to: getDate
+  });
+};
+
+
+const getPrice = () => getRandomInteger(PointPrise.MIN, PointPrise.MAX) * PointPrise.MULTIPLIER;
+
+
+/**
+ * Генерирует событие на маршруте
  * @param {number} id
  * @return {Point}
-*/
-export const generatePoint = (id) => ({
-  'id':String(id),
-  'type': 'taxi',
-  'destination': id,
-  'dateFrom': '2019-07-10T22:55:56.845Z',
-  'dateTo': '2019-07-11T11:22:13.375Z',
-  'basePrice': 222,
-  'offers': [id],
-});
+ */
+const generatePoint = (id) => {
+  const date = createDate();
 
+  return({
+    id,
+    type: getRandomElement(POINT_TYPES),
+    destination: id,
+    dateFrom: date.from,
+    dateTo: date.to,
+    basePrice: getPrice(),
+    offers: [id]
+  });
+};
 
+export {generatePoint};
