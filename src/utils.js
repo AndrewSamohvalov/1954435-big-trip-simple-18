@@ -41,13 +41,13 @@ const getRandomUniqueInteger = (min, max) => {
 };
 
 
-/* Возврашает дату в формате 'MMM YY'
+/**  Возврашает дату в формате 'MMM D'
 * @param {string} isoDate
 * @return {string}
 */
-const formatDate = (isoDate) => dayjs(isoDate).format('MMM YY');
+const formatDate = (isoDate) => dayjs(isoDate).format('MMM D');
 
-/* Возвращает время в формате 'HH:mm'
+/**Возвращает время в формате 'HH:mm'
 * @param {string} isoDate
 * @return {string}
 */

@@ -18,3 +18,4 @@
  * @prop {number} base_price
  * @prop {number[]} offers
  */
+

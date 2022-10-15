@@ -64,8 +64,9 @@ export default class PointView extends BaseView {
     const startTimePoint = this.querySelector('.event__start-time');
 
     Object.assign(startTimePoint, {
-      textContent: time,
-      dateTime: isoDate
+      dateTime: isoDate,
+      textContent: time
+
     });
 
     return this;
@@ -80,8 +81,9 @@ export default class PointView extends BaseView {
     const endTimePoint = this.querySelector('.event__end-time');
 
     Object.assign(endTimePoint, {
-      textContent: time,
-      dateTime: isoDate
+      dateTime: isoDate,
+      textContent: time
+
     });
 
     return this;
