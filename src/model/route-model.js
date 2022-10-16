@@ -6,11 +6,11 @@ const points = generatePoints();
 const destinations = generateDestinations();
 const offerGroups = generateOfferGroups();
 
-/**Получает данные для маршрута */
+/**Модель маршрута */
 export default class RouteModel {
 
   /**
- * Вернёт точки маршрута
+ * Получит точки маршрута
  * @return {AggregatedPoint[]}
   */
 

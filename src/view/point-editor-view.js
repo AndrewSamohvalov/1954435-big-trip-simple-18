@@ -1,6 +1,7 @@
 import BaseView from './base-view.js';
 import { createPointEditorTemplate } from './point-editor-template.js';
 
+/** Представление формы редактирования точки */
 export default class PointEditorView extends BaseView {
   /**
    * @override

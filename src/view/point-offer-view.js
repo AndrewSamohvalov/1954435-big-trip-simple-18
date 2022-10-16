@@ -1,7 +1,7 @@
 import BaseView from './base-view.js';
 import {createPointOfferTemplate} from './point-offer-template.js';
 
-/** Дополнительная опция */
+/** Представление дополнительной опции */
 export default class PointOfferView extends BaseView {
   constructor() {
     super();
@@ -14,7 +14,7 @@ export default class PointOfferView extends BaseView {
   }
 
   /**
-   * Устанавливает заголовок
+   * Установит заголовок
    * @param {string} title
    */
   setTitle(title) {
@@ -26,7 +26,7 @@ export default class PointOfferView extends BaseView {
   }
 
   /**
-   * Устанавливает цену
+   * Устанавливит цену
    * @param {number} price
    */
   setPrice(price) {

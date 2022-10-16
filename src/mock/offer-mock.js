@@ -23,7 +23,7 @@ const generateTitle = () => getRandomElement(OFFER_TITLES);
 const generatePrice = () => getRandomInteger(OfferPrise.MIN, OfferPrise.MAX);
 
 /**
- * Генерирует дополнительную опцию
+ * Сгенерирует дополнительную опцию
  * @param {number} id
  * @return {Offer}
  */
@@ -34,7 +34,7 @@ const generateOffer = (id) => ({
 });
 
 /**
- * Генерирует список дополнительных опций
+ * Сгенерирует список дополнительных опций
  * @param {number} min
  * @param {number} max
  * @return {Offer[]}
@@ -47,7 +47,7 @@ const generateOffers = () => {
 };
 
 /**
- * Генерирует группы дополнительных опций
+ * Сгенерирует группы дополнительных опций
  * @return {OfferGroup}
  */
 const generateOfferGroups = () =>
