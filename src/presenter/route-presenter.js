@@ -1,4 +1,4 @@
-import {formatDate,formatTime} from '../utils.js';
+import {formatDate,formatTime,formatDateWithTime} from '../utils.js';
 import RouteView from '../view/route-veiw.js';
 import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view';
@@ -21,6 +21,7 @@ export default class RoutePresenter {
   init(routeContainer) {
 
     const points = this.model.get();
+
 
     this.view.append(new PointEditorView());
     this.view.append(...points.map(this.createPointView,this));
@@ -67,15 +68,24 @@ export default class RoutePresenter {
 
     pointView.addEventListener('expand', () => {
       this.pointEditorView.close();
-      // this.updatePointView(point);
-      this.pointEditorView.link(pointView).open();
+      this.updatePointView(point);
+      this.pointEditorView
+        .link(pointView)
+        .open();
     });
 
     return pointView;
   }
 
-  // TODO метод обновления формы редактирования
-  // updatePointView(point) {}
+  updatePointView(point) {
+    return this.pointEditorView
+      .setIcon(point.type)
+      .setType(point.type)
+      .setDestination(point.destination.name)
+      .setStartTime(formatDateWithTime(point.dateFrom))
+      .setEndTime(formatDateWithTime(point.dateTo))
+      .setPrice(point.basePrice);
+  }
 
 
 }

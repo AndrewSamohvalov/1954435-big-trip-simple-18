@@ -1,8 +1,8 @@
 import BaseView from './base-view.js';
-import { createAdjacentHtmlNewPoint } from './trip-new-point-template.js';
+import { createAdjacentHtmlNewPoint } from './new-point-template.js';
 
 /** Представление формы создания новой точки */
-export default class TripNewPointView extends BaseView {
+export default class NewPointView extends BaseView {
   /**
    * @override
    */
@@ -11,4 +11,4 @@ export default class TripNewPointView extends BaseView {
   }
 }
 
-customElements.define('trip-new-point', TripNewPointView);
+customElements.define('trip-new-point', NewPointView);
