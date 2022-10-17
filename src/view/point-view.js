@@ -1,8 +1,16 @@
 import BaseView from './base-view.js';
 import { createPointTemplate } from './point-template.js';
 
-/** Точка маршрута путешествия */
+/** Представление точки на маршруте */
 export default class PointView extends BaseView {
+  constructor() {
+    super();
+
+    this.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      this.dispatchEvent(new CustomEvent('expand'));
+    });
+  }
+
   /**
    * @override
    */
@@ -11,7 +19,7 @@ export default class PointView extends BaseView {
   }
 
   /**
-   * Устанавливает дату
+   * Устанавливит дату
    * @param {string} date
    * @param {string} isoDate
    */
@@ -29,7 +37,7 @@ export default class PointView extends BaseView {
   }
 
   /**
-   * Устанавливает иконку
+   * Устанавливит иконку
    * @param {string} type
    */
 
@@ -43,6 +51,7 @@ export default class PointView extends BaseView {
   }
 
   /**
+   * Установит заголовок
    * @param {string} title
    */
 
@@ -57,6 +66,7 @@ export default class PointView extends BaseView {
   }
 
   /**
+   *  Установит время начала
    * @param {string} time
    * @param {string} isoDate
    */
@@ -74,6 +84,7 @@ export default class PointView extends BaseView {
   }
 
   /**
+   * * Установит время окончания
    * @param {string} time
    * @param {string} isoDate
    */
@@ -91,7 +102,7 @@ export default class PointView extends BaseView {
   }
 
   /**
-   * Устанавливает цену
+   * Устанавливит цену
    * @param {number} price
    */
 
@@ -105,16 +116,23 @@ export default class PointView extends BaseView {
   }
 
   /**
-   * Добавляет опции
+    * Заменит дополнительные опции
    * @param {HTMLElement} offer
    */
+
+  replaceOffers(...offerViews) {
+    this.querySelector('.event__selected-offers').replaceChildren(...offerViews);
+
+    return this;
+  }
+  /*
   appendOffer(offer) {
     const offerListPoint = this.querySelector('.event__selected-offers');
 
     offerListPoint.append(offer);
 
     return this;
-  }
+  }*/
 }
 
 
