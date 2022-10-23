@@ -64,9 +64,6 @@ const generatePoint = (id) => {
  * @param {number} length
  * @returns {Point[]}
  */
-const generatePoints = (length = 10) =>
+export const generatePoints = (length = 10) =>
   Array.from({length}, (_item, index) => generatePoint(index + 1));
-
-export {generatePoints};
-
 

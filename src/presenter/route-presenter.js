@@ -6,6 +6,9 @@ import RouteModel from '../model/route-model.js';
 import OfferView from '../view/offer-view.js';
 import PointOfferView from '../view/point-offer-view.js';
 
+/**
+ * Презентер для маршрута со списком точек остановки
+ */
 
 export default class RoutePresenter {
   constructor() {

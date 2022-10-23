@@ -38,7 +38,7 @@ export default class PointView extends BaseView {
 
   /**
    * Устанавит иконку
-   * @param {string} type
+   * @param {OfferType} type
    */
 
   setIcon(type) {
@@ -117,7 +117,7 @@ export default class PointView extends BaseView {
 
   /**
     * Заменит дополнительные опции
-   * @param {HTMLElement} offer
+   * @param {...HTMLElement} offer
    */
 
   replaceOffers(...offerViews) {
