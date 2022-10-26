@@ -26,14 +26,11 @@ export default class RoutePresenter {
 
     const points = this.model.get();
 
-
-    //this.view.append(new PointEditorView());
     this.view.append(...points.map(this.createPointView,this));
 
     routeContainer.append(this.view);
 
   }
-
 
   /**
    *

@@ -52,6 +52,18 @@ export default class PointEditorView extends BaseView {
     return this;
   }
 
+
+  /**
+   * Обработает событие по нажатию на клавишу Esc
+   * @param {KeyboardEvent} event
+   */
+
+  handleEvent(event) {
+    if (event.key === 'Escape') {
+      this.close();
+    }
+  }
+
   /**
    * Установит иконку
    * @param {OfferType} type
@@ -149,16 +161,6 @@ export default class PointEditorView extends BaseView {
     return this;
   }
 
-  /**
-   * Обработает событие по нажатию на клавишу Esc
-   * @param {KeyboardEvent} event
-   */
-
-  handleEvent(event) {
-    if (event.key === 'Escape') {
-      this.close();
-    }
-  }
 }
 
 customElements.define('trip-point-editor', PointEditorView);
