@@ -7,17 +7,16 @@ export default class BaseView extends HTMLElement {
     this.insertAdjacentHTML(this.adjacentHtmlPosition, this.createAdjacentHtml(...arguments));
   }
 
-  /**
-   * Позиция дополнительной html-разметки
-   */
+  /**Задаст позицию дополнительной html-разметки  */
+
   get adjacentHtmlPosition() {
     return 'beforeend';
   }
 
-  /**
-   * Создает дополнительную html-разметку
-   */
+  /** Создаст дополнительную html-разметку*/
+
   createAdjacentHtml() {
     return '';
   }
+
 }

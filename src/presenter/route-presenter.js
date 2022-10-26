@@ -1,48 +1,109 @@
-import TripRouteView from '../view/trip-route-view.js';
-import TripSortView from '../view/trip-sort-view.js';
-import TripPointView from '../view/trip-route-view';
-import TripNewPointView from '../view/trip-new-point-view';
-import TripPointEditorView from '../view/trip-point-editor-view';
+import {formatDate,formatTime,formatDateWithTime} from '../utils.js';
+import RouteView from '../view/route-veiw.js';
+import PointView from '../view/point-view.js';
+import PointEditorView from '../view/point-editor-view';
+import RouteModel from '../model/route-model.js';
+import OfferView from '../view/offer-view.js';
+import PointOfferView from '../view/point-offer-view.js';
+
+/**
+ * Презентер для маршрута со списком точек остановки
+ */
 
 export default class RoutePresenter {
-  routeElement = new TripRouteView();
+  constructor() {
+    this.model = new RouteModel();
+    this.view = new RouteView();
+    this.pointEditorView = new PointEditorView();
+  }
 
-  init(containerElement) {
-    this.containerElement = containerElement;
+  /**
+   * Инициализирует RoutePresenter
+   * @param {HTMLElement} routeContainer
+   */
 
-    this.routeElement.append(new TripSortView());
-    this.routeElement.append(new TripNewPointView());
-    this.routeElement.append(new TripPointEditorView());
+  init(routeContainer) {
 
-    for (let i = 0; i < 3; i++) {
-      this.routeElement.append(new TripPointView());
-    }
+    const points = this.model.get();
 
-    containerElement.append(this.routeElement);
+    this.view.append(...points.map(this.createPointView,this));
+
+    routeContainer.append(this.view);
+
+  }
+
+  /**
+   *
+   * @param {AggregatedPoint} point
+   */
+
+  /**
+   * Создаст точку на маршруте
+   * @param {AggregatedPoint} point
+   */
+
+  createPointView(point) {
+    const pointView = new PointView();
+
+    const title = `${point.type} ${point.destination.name}`;
+
+    pointView
+      .setDate(formatDate(point.dateFrom), point.dateFrom)
+      .setIcon(point.type)
+      .setTitle(title)
+      .setStartTime(formatTime(point.dateFrom), point.dateFrom)
+      .setEndTime(formatTime(point.dateTo), point.dateTo)
+      .setPrice(point.basePrice)
+      .replaceOffers(...point.offers.map(this.createSelectedOfferView, this));
+
+    pointView.addEventListener('expand', () => {
+      this.pointEditorView.close();
+      this.updatePointView(point);
+      this.pointEditorView
+        .link(pointView)
+        .open();
+    });
+
+    return pointView;
+  }
+
+  /**
+   * Создаст (выбранную) дополнительную опцию
+   * @param {Offer} offer
+   */
+  createSelectedOfferView(offer) {
+    return new PointOfferView()
+      .setTitle(offer.title)
+      .setPrice(offer.price);
+  }
+
+  /**
+   * Создаст форму редактирования точки
+   * @param {AggregatedPoint} point
+   */
+
+  updatePointView(point) {
+    return this.pointEditorView
+      .setIcon(point.type)
+      .setType(point.type)
+      .setDestination(point.destination.name)
+      .setStartTime(formatDateWithTime(point.dateFrom))
+      .setEndTime(formatDateWithTime(point.dateTo))
+      .setPrice(point.basePrice)
+      .setDescription(point.destination.description)
+      .replaceOffers(...point.offers.map(this.createAvailableOfferView, this));
+  }
+
+
+  /**
+   * Создаст (доступную) дополнительную опцию
+   * @param {Offer} offer
+   */
+  createAvailableOfferView(offer) {
+    return new OfferView()
+      .setTitle(offer.title)
+      .setPrice(offer.price);
   }
 }
 
-/*
-import BaseView from '../view/base-view.js';
-import SortView from '../view/sort-view.js';
-import WayPointListView from '../view/way-point-list-view.js';
-import WayPointView from '../view/way-point-view.js';
-import CreationFormView from '../view/creation-form-view.js';
-import EditFormView from '../view/edit-form-view.js';
-import { render } from '../render.js';
 
-export default class RoutePresenter {
-  wayPointListComponent = new WayPointListView();
-
-  init = (eventsContainer) => {
-    this.eventsContainer = eventsContainer;
-    render(new SortView(), this.eventsContainer);
-    render(this.wayPointListComponent, this.eventsContainer);
-    render(new EditFormView(), this.wayPointListComponent.getElement());
-    render(new CreationFormView(), this.wayPointListComponent.getElement());
-    for (let i = 0; i < 3; i++) {
-      render(new WayPointView(), this.wayPointListComponent.getElement());
-    }
-  };
-}
-*/
