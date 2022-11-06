@@ -3,8 +3,8 @@ import RouteView from '../view/route-veiw.js';
 import PointView from '../view/point-view.js';
 import PointEditorView from '../view/point-editor-view';
 import RouteModel from '../model/route-model.js';
-import OfferView from '../view/offer-view.js';
-import PointOfferView from '../view/point-offer-view.js';
+import OfferAvailableView from '../view/offer-available-view.js';
+import OfferSelectedView from '../view/offer-selected-view.js';
 
 /**
  * Презентер для маршрута со списком точек остановки
@@ -72,7 +72,7 @@ export default class RoutePresenter {
    * @param {Offer} offer
    */
   createSelectedOfferView(offer) {
-    return new PointOfferView()
+    return new OfferSelectedView()
       .setTitle(offer.title)
       .setPrice(offer.price);
   }
@@ -100,7 +100,7 @@ export default class RoutePresenter {
    * @param {Offer} offer
    */
   createAvailableOfferView(offer) {
-    return new OfferView()
+    return new OfferAvailableView()
       .setTitle(offer.title)
       .setPrice(offer.price);
   }

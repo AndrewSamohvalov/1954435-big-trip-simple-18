@@ -1,8 +1,8 @@
 import BaseView from './base-view.js';
-import {createPointOfferTemplate} from './point-offer-template.js';
+import {createOfferSelectedTemplate} from './offer-selected-template.js';
 
 /** Представление (выбранной) дополнительной опции */
-export default class PointOfferView extends BaseView {
+export default class OfferSelectedView extends BaseView {
   constructor() {
     super();
     this.classList.add('event__offer');
@@ -10,7 +10,7 @@ export default class PointOfferView extends BaseView {
 
   /** @override */
   createAdjacentHtml() {
-    return createPointOfferTemplate();
+    return createOfferSelectedTemplate();
   }
 
   /**
@@ -38,4 +38,4 @@ export default class PointOfferView extends BaseView {
   }
 }
 
-customElements.define('offer-selected', PointOfferView);
+customElements.define('offer-selected', OfferSelectedView);

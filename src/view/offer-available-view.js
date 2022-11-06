@@ -1,8 +1,8 @@
 import BaseView from './base-view.js';
-import {createOfferTemplate} from './offer-template.js';
+import {createOfferAvailableTemplate} from './offer-available-template.js';
 
 /** Представление (доступной) дополнительной опции в редакторе */
-export default class OfferView extends BaseView {
+export default class OfferAvailableView extends BaseView {
   constructor() {
     super();
 
@@ -11,7 +11,7 @@ export default class OfferView extends BaseView {
 
   /** @override */
   createAdjacentHtml() {
-    return createOfferTemplate();
+    return createOfferAvailableTemplate();
   }
 
   /**
@@ -63,4 +63,4 @@ export default class OfferView extends BaseView {
   }
 }
 
-customElements.define('offer-available', OfferView);
+customElements.define('offer-available', OfferAvailableView);
