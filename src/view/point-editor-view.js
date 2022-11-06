@@ -41,6 +41,7 @@ export default class PointEditorView extends BaseView {
     return this;
   }
 
+
   /**
    * Закроет редактор точки
    */
