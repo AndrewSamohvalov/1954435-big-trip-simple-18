@@ -11,10 +11,14 @@ import OfferSelectedView from '../view/offer-selected-view.js';
  */
 
 export default class RoutePresenter {
+  #model = null;
+  #view = null;
+  #pointEditorView = null;
+
   constructor() {
-    this.model = new RouteModel();
-    this.view = new RouteView();
-    this.pointEditorView = new PointEditorView();
+    this.#model = new RouteModel();
+    this.#view = new RouteView();
+    this.#pointEditorView = new PointEditorView();
   }
 
   /**
@@ -24,11 +28,11 @@ export default class RoutePresenter {
 
   init(routeContainer) {
 
-    const points = this.model.get();
+    const points = this.#model.get();
 
-    this.view.append(...points.map(this.createPointView,this));
+    this.#view.append(...points.map(this.#createPointView,this));
 
-    routeContainer.append(this.view);
+    routeContainer.append(this.#view);
 
   }
 
@@ -42,7 +46,7 @@ export default class RoutePresenter {
    * @param {AggregatedPoint} point
    */
 
-  createPointView(point) {
+  #createPointView(point) {
     const pointView = new PointView();
 
     const title = `${point.type} ${point.destination.name}`;
@@ -54,12 +58,12 @@ export default class RoutePresenter {
       .setStartTime(formatTime(point.dateFrom), point.dateFrom)
       .setEndTime(formatTime(point.dateTo), point.dateTo)
       .setPrice(point.basePrice)
-      .replaceOffers(...point.offers.map(this.createSelectedOfferView, this));
+      .replaceOffers(...point.offers.map(this.#createSelectedOfferView, this));
 
     pointView.addEventListener('expand', () => {
-      this.pointEditorView.close();
-      this.updatePointView(point);
-      this.pointEditorView
+      this.#pointEditorView.close();
+      this.#updatePointView(point);
+      this.#pointEditorView
         .link(pointView)
         .open();
     });
@@ -71,7 +75,7 @@ export default class RoutePresenter {
    * Создаст (выбранную) дополнительную опцию
    * @param {Offer} offer
    */
-  createSelectedOfferView(offer) {
+  #createSelectedOfferView(offer) {
     return new OfferSelectedView()
       .setTitle(offer.title)
       .setPrice(offer.price);
@@ -82,8 +86,8 @@ export default class RoutePresenter {
    * @param {AggregatedPoint} point
    */
 
-  updatePointView(point) {
-    return this.pointEditorView
+  #updatePointView(point) {
+    return this.#pointEditorView
       .setIcon(point.type)
       .setType(point.type)
       .setDestination(point.destination.name)
@@ -91,7 +95,7 @@ export default class RoutePresenter {
       .setEndTime(formatDateWithTime(point.dateTo))
       .setPrice(point.basePrice)
       .setDescription(point.destination.description)
-      .replaceOffers(...point.offers.map(this.createAvailableOfferView, this));
+      .replaceOffers(...point.offers.map(this.#createAvailableOfferView, this));
   }
 
 
@@ -99,7 +103,7 @@ export default class RoutePresenter {
    * Создаст (доступную) дополнительную опцию
    * @param {Offer} offer
    */
-  createAvailableOfferView(offer) {
+  #createAvailableOfferView(offer) {
     return new OfferAvailableView()
       .setTitle(offer.title)
       .setPrice(offer.price);
