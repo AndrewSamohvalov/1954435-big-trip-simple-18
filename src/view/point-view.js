@@ -131,4 +131,4 @@ export default class PointView extends BaseView {
 }
 
 
-customElements.define('trip-point', PointView);
+customElements.define('route-point', PointView);

@@ -1,10 +1,12 @@
 import {formatDate,formatTime,formatDateWithTime} from '../utils.js';
 import RouteView from '../view/route-veiw.js';
 import PointView from '../view/point-view.js';
+import SortView from '../view/sort-view.js';
 import PointEditorView from '../view/point-editor-view';
 import RouteModel from '../model/route-model.js';
 import OfferAvailableView from '../view/offer-available-view.js';
 import OfferSelectedView from '../view/offer-selected-view.js';
+import MessageView from '../view/message-view.js';
 
 /**
  * Презентер для маршрута со списком точек остановки
@@ -14,12 +16,16 @@ export default class RoutePresenter {
   #container = null;
   #model = null;
   #view = null;
+  #messegeView = null;
+  #sortView = null;
   #pointEditorView = null;
 
   constructor(container) {
     this.#container = container;
     this.#model = new RouteModel();
     this.#view = new RouteView();
+    this.#messegeView = new MessageView;
+    this.#sortView = new SortView;
     this.#pointEditorView = new PointEditorView();
   }
 
@@ -27,7 +33,12 @@ export default class RoutePresenter {
 
     const points = this.#model.get();
 
-    this.#view.append(...points.map(this.#createPointView,this));
+    if (points && points.length) {
+      this.#container.append(this.#sortView);
+      this.#view.append(...points.map(this.#createPointView, this));
+    } else {
+      this.#view.append(this.#messegeView);
+    }
 
     this.#container.append(this.#view);
 
